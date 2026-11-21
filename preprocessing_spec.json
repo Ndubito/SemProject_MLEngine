@@ -1,0 +1,22 @@
+{
+  "model_file": "dr_triage_mobilenetv2_bnfix.tflite",
+  "input": {
+    "shape": [
+      1,
+      224,
+      224,
+      3
+    ],
+    "dtype": "float32",
+    "channels": "RGB",
+    "range": "0-255 raw values, no normalisation"
+  },
+  "preprocessing": [
+    "decode the image to RGB",
+    "convert a copy to grey; keep the rows and columns that contain any pixel above 7; crop to them (keep the original if nothing remains)",
+    "resize to 224x224 with bilinear interpolation (aspect ratio is not preserved)"
+  ],
+  "output": "one float: probability that the eye is referable (grade 2 or higher)",
+  "decision": "refer if probability >= 0.7931",
+  "validated_on": "APTOS 2019 (India). Not tested on smartphone photographs or on Kenyan patients."
+}
